@@ -1,4 +1,4 @@
-const {Deta, app} = require('deta');
+const {Deta} = require('deta');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const deta = new Deta();
@@ -8,14 +8,14 @@ const users = deta.Base('users');
 
 const DEV_API_BASE = 'https://dev.to/api/';
 
-app.lib.cron(async () => {
+(async () => {
 	const allUsers = await fetchAllUsers();
 
 	allUsers.forEach(async user => {
 		const postStats = await fetchPostStats(user.apiKey);
 		console.log({postStats});
 	});
-});
+})()
 
 async function fetchAllUsers(last = undefined) {
 	const allUsers = [];
@@ -68,5 +68,3 @@ async function fetchAllPosts(apiKey, page = 1) {
 		return posts;
 	}
 }
-
-module.exports = app;
