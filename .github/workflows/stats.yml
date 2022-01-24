@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  collect-stats:
     runs-on: ubuntu-latest
     
     steps:
@@ -15,6 +15,9 @@ jobs:
 
       - name: Setup node
         uses: actions/setup-node@v2.5.1
+
+      - name: Install deps
+        run: npm install
  
       - name: Run job
         run: DETA_PROJECT_KEY=${{secrets.DETA_PROJECT_KEY}} node index.js
