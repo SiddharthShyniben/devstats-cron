@@ -1,0 +1,20 @@
+name: Stats
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2.5.1
+ 
+      - name: Run job
+        run: DETA_PROJECT_KEY=${{secrets.DETA_PROJECT_KEY}} node index.js
