@@ -15,7 +15,7 @@ const DEV_API_BASE = 'https://dev.to/api/';
 		const postStats = await fetchPostStats(user.apiKey);
 		console.log({postStats});
 	});
-})()
+})();
 
 async function fetchAllUsers(last = undefined) {
 	const allUsers = [];
@@ -23,7 +23,7 @@ async function fetchAllUsers(last = undefined) {
 
 	if (res.items.length > 0) {
 		allUsers.push(...res.items);
-		allUsers.push(...fetchAllUsers(res.last));
+		allUsers.push(...await fetchAllUsers(res.last));
 	} else {
 		return allUsers;
 	}
@@ -63,7 +63,7 @@ async function fetchAllPosts(apiKey, page = 1) {
 	posts.push(res);
 
 	if (posts.length > 0) {
-		posts.push(...fetchAllPosts(apiKey, page + 1));
+		posts.push(...await fetchAllPosts(apiKey, page + 1));
 	} else {
 		return posts;
 	}
