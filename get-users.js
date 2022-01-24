@@ -1,6 +1,7 @@
 const {Deta} = require('deta');
 const deta = new Deta();
 
+// eslint-disable-next-line new-cap
 const users = deta.Base('users');
 
 async function fetchAllUsers(last = undefined) {
@@ -17,4 +18,8 @@ async function fetchAllUsers(last = undefined) {
 	}
 }
 
-module.exports = {fetchAllUsers};
+function updateUser(...args) {
+	return users.update(...args);
+}
+
+module.exports = {fetchAllUsers, updateUser};
