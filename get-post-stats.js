@@ -23,7 +23,7 @@ async function fetchPostStats(apiKey) {
 async function fetchAllPosts(apiKey, page = 1) {
 	const posts = [];
 	const res = await fetch(
-		DEV_API_BASE + 'articles/me/published?per_page=100&page=' + page,
+		`${DEV_API_BASE}articles/me/published?per_page=100&page=${page}`,
 		{
 			headers: {
 				'Content-Type': 'application/json',
