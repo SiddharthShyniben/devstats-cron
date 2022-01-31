@@ -1,5 +1,6 @@
 const {fetchAllUsers, updateUser} = require('./get-users');
 const {fetchPostStats} = require('./get-post-stats');
+const {getAllFollowers} = require('./get-follower-stats');
 
 (async () => {
 	console.log('Starting...');
@@ -9,7 +10,11 @@ const {fetchPostStats} = require('./get-post-stats');
 	allUsers.forEach(async user => {
 		console.log('Fetching stats for user:', user.username);
 		const postStats = await fetchPostStats(user.apiKey);
-		updateUser(postStats, user.key);
+		const followers = await getAllFollowers(user.apiKey);
+
+		updateUser({postStats, followers}, user.key);
+
+		console.log(followers.length, 'followers found');
 	});
 })();
 
