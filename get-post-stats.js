@@ -4,7 +4,6 @@ const DEV_API_BASE = 'https://dev.to/api/';
 async function fetchPostStats(apiKey) {
 	console.log('Fetching post stats for', apiKey);
 	const posts = await fetchAllPosts(apiKey);
-	console.log(posts);
 
 	return posts
 		.map(post => ({
