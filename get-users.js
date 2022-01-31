@@ -18,8 +18,18 @@ async function fetchAllUsers(last = undefined) {
 	}
 }
 
-function updateUser(...args) {
-	return users.update(...args);
+function updateUser(updates, key) {
+	const update = {
+		postStats: users.util.append(updates.postStats),
+		followers: updates.followers,
+		followerCount: updates.followers.length,
+	};
+
+	var util = require('util');
+
+	util.inspect(update, false, 2, true)
+
+	return users.update(update, key);
 }
 
 module.exports = {fetchAllUsers, updateUser};
